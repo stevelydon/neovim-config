@@ -5,6 +5,12 @@ return {
 		"nvim-neotest/nvim-nio",
 	},
 	keys = {
+		{
+			"<leader>de",
+			function()
+				require("dapui").eval(nil, { enter = true })
+			end,
+		},
 		-- Basic debugging keymaps, feel free to change to your liking!
 		{
 			"<F5>",
@@ -35,14 +41,14 @@ return {
 			desc = "Debug: Step Out",
 		},
 		{
-			"<leader>b",
+			"<leader>db",
 			function()
 				require("dap").toggle_breakpoint()
 			end,
 			desc = "Debug: Toggle Breakpoint",
 		},
 		{
-			"<leader>B",
+			"<leader>dB",
 			function()
 				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 			end,
@@ -110,7 +116,7 @@ return {
 		})
 
 		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-		dap.listener.before.event_terminated["dapui_config"] = dapui.close
+		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 		dap.listeners.before.event_exited["dapui_config"] = dapui.close
 	end,
 }
